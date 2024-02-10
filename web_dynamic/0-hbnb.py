@@ -11,7 +11,9 @@ app = Flask(__name__)
 # app.jinja_env.trim_blocks = True
 # app.jinja_env.lstrip_blocks = True
 
-
+HOST = "0.0.0.0"
+PORT = 5000
+ROUT = '/0-hbnb/'
 @app.teardown_appcontext
 def close_db(error):
     """ Remove the current SQLAlchemy Session """
@@ -34,7 +36,7 @@ def hbnb():
     places = storage.all(Place).values()
     places = sorted(places, key=lambda k: k.name)
 
-    return render_template('100-hbnb.html',
+    return render_template('0-hbnb.html',
                            states=st_ct,
                            amenities=amenities,
                            places=places)
@@ -42,4 +44,6 @@ def hbnb():
 
 if __name__ == "__main__":
     """ Main Function """
+
+    print(f"running on local host http://127.0.0.1:{PORT}/{ROUT}")
     app.run(host='0.0.0.0', port=5000)
